@@ -1,0 +1,27 @@
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+
+        last = m + n - 1
+        m = m - 1
+        n = n - 1
+
+        #replacing the 0's in nums1
+        while m >= 0 and n >= 0:
+            if nums1[m] < nums2[n]:
+                nums1[last] = nums2[n]
+                n -= 1
+            else:
+                nums1[last] = nums1[m]
+                m -= 1
+            last -= 1
+
+        #there could be a possibility that nums2 are not merged to nums1 
+        # (nums2 values are smaller than nums1)
+        # if nums2 ae greater, we would've reached the 0 already
+        while n >= 0:
+            nums1[last] = nums2[n]
+            n -= 1
+            last -= 1

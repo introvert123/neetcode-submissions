@@ -1,0 +1,21 @@
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+
+        if amount == 0:
+            return 0
+        #dp[x] = minimum coins needed to make amount x
+        dp = [float('inf')]*(amount+1)
+        dp[0] = 0
+
+        for a in range(1,amount+1):
+            for coin in coins:
+                if a - coin >= 0:
+                    dp[a] = min(dp[a], 1 + dp[a-coin])
+
+        if dp[amount] == float('inf'):
+            return -1
+        else:
+            return dp[amount]
+        
+
+        
